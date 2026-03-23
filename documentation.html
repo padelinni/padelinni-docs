@@ -861,8 +861,13 @@ body {
   .arch-diagram { grid-template-columns: 1fr; gap: 16px; }
   .arch-arrow { transform: rotate(90deg); }
   .tech-grid { grid-template-columns: repeat(2, 1fr); }
-  .two-col { grid-template-columns: 1fr; gap: 24px; }
-  .two-col > div { min-width: 0; overflow-wrap: break-word; word-wrap: break-word; }
+  .two-col { grid-template-columns: 1fr; gap: 24px; overflow: hidden; }
+  .two-col > div { min-width: 0; max-width: 100%; overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; }
+  .two-col p, .two-col li { font-size: 14px !important; }
+  .two-col .card-tags { overflow-x: auto; flex-wrap: wrap; }
+  .two-col div[style*="padding: 16px 20px"] { padding: 12px 14px !important; }
+  #matches .section-header p { font-size: 14px; }
+  #matches h3 { font-size: 17px !important; }
   .flow-steps { flex-direction: column; }
   .flow-step::after { display: none; }
   .section-header h2 { font-size: 24px; }
