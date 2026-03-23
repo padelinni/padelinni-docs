@@ -452,13 +452,68 @@ body {
 }
 .lightbox-nav.prev { left: -70px; }
 .lightbox-nav.next { right: -70px; }
+.lightbox-bottom-bar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 8px;
+  gap: 8px;
+}
+.lightbox-bottom-bar > div { text-align: center; flex: 1; min-width: 0; }
+.lightbox-nav-mobile {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
 @media (max-width: 768px) {
-  .lightbox-overlay { padding: 0; align-items: flex-start; }
-  .lightbox-content { max-width: 100vw; width: 100vw; max-height: 100vh; gap: 0; padding: 0; }
-  .lightbox-content img { max-width: 100vw; max-height: 80vh; width: 100%; border-radius: 0; box-shadow: none; object-fit: contain; margin-top: 60px; }
-  .lightbox-close { position: fixed; top: 16px; right: 16px; width: 44px; height: 44px; font-size: 20px; background: rgba(255,255,255,0.15); z-index: 10002; }
-  .lightbox-nav { display: none; }
-  .lightbox-caption { font-size: 13px; padding: 12px 16px; color: rgba(255,255,255,0.6); }
+  .lightbox-overlay {
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .lightbox-content {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px;
+  }
+  .lightbox-content img {
+    width: calc(100vw - 32px);
+    max-height: 55vh;
+    border-radius: 8px;
+    box-shadow: none;
+    object-fit: contain;
+    transform: none !important;
+  }
+  .lightbox-overlay.active .lightbox-content img { transform: none !important; }
+  .lightbox-close {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    left: auto;
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    z-index: 10002;
+  }
+  .lightbox-nav.desktop-only { display: none !important; }
+  .lightbox-bottom-bar { display: flex !important; }
+  .lightbox-caption { font-size: 13px; padding: 0 16px; }
   .lightbox-counter { font-size: 11px; }
 }
 .lightbox-counter {
@@ -2725,11 +2780,17 @@ body {
 <div class="lightbox-overlay" id="lightbox">
   <div class="lightbox-content">
     <button class="lightbox-close" id="lightbox-close">✕</button>
-    <button class="lightbox-nav prev" id="lightbox-prev">‹</button>
-    <button class="lightbox-nav next" id="lightbox-next">›</button>
+    <button class="lightbox-nav prev desktop-only" id="lightbox-prev">‹</button>
+    <button class="lightbox-nav next desktop-only" id="lightbox-next">›</button>
     <img id="lightbox-img" src="" alt="">
-    <div class="lightbox-caption" id="lightbox-caption"></div>
-    <div class="lightbox-counter" id="lightbox-counter"></div>
+    <div class="lightbox-bottom-bar">
+      <button class="lightbox-nav-mobile" id="lightbox-prev-m">‹ Anterior</button>
+      <div>
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+      </div>
+      <button class="lightbox-nav-mobile" id="lightbox-next-m">Următor ›</button>
+    </div>
   </div>
 </div>
 
@@ -2850,6 +2911,12 @@ window.addEventListener('scroll', () => {
   // Nav
   lbPrev.addEventListener('click', (e) => { e.stopPropagation(); navigate(-1); });
   lbNext.addEventListener('click', (e) => { e.stopPropagation(); navigate(1); });
+
+  // Mobile nav buttons
+  const lbPrevM = document.getElementById('lightbox-prev-m');
+  const lbNextM = document.getElementById('lightbox-next-m');
+  lbPrevM.addEventListener('click', (e) => { e.stopPropagation(); navigate(-1); });
+  lbNextM.addEventListener('click', (e) => { e.stopPropagation(); navigate(1); });
 
   // Keyboard
   document.addEventListener('keydown', (e) => {
