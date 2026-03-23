@@ -9,6 +9,7 @@
 <style>
 /* ========== RESET & BASE ========== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+img, table, pre, code, .data-table { max-width: 100%; overflow-x: auto; }
 html { scroll-behavior: smooth; font-size: 16px; }
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -16,6 +17,7 @@ body {
   color: #1E293B;
   line-height: 1.7;
   overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* ========== CSS VARIABLES ========== */
@@ -159,6 +161,7 @@ body {
 .main-content {
   margin-left: var(--sidebar-width);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* ========== HERO ========== */
@@ -167,6 +170,7 @@ body {
   padding: 100px 60px 80px;
   position: relative;
   overflow: hidden;
+  max-width: 100%;
 }
 .hero::before {
   content: '';
@@ -271,6 +275,7 @@ body {
 .section {
   padding: 80px 60px;
   max-width: 1400px;
+  overflow: hidden;
 }
 .section:nth-child(even) { background: #fff; }
 .section:nth-child(odd) { background: var(--slate-50); }
@@ -850,7 +855,7 @@ body {
   .feature-wide.reverse { grid-template-columns: 1fr; direction: ltr; }
   .hero-stats { flex-wrap: wrap; gap: 20px; }
   .hero-stat .number { font-size: 28px; }
-  .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 24px 20px; gap: 16px; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 24px 20px; gap: 16px; overflow: hidden; }
   .stat-item .s-number { font-size: 24px; }
   .value-grid { grid-template-columns: 1fr !important; }
   .arch-diagram { grid-template-columns: 1fr; gap: 16px; }
